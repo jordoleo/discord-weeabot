@@ -1,3 +1,4 @@
+import express from 'express';
 import { config } from 'dotenv';
 import { Client } from 'discord.js';
 import { commandUtils } from './utils';
@@ -34,3 +35,7 @@ client.on('message', msg => {
 }); 
 
 client.login(process.env.BOT_TOKEN);
+
+const port = process.env.PORT | 5000;
+const app = express();
+app.listen(port, () => {});
