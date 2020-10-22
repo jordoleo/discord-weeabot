@@ -11,6 +11,7 @@ class MagicBall extends Module {
         const msg = message.content;
         if (msg.toLowerCase().includes("azen small pp")) {
             message.reply("Always has been");
+            return;
         }
         const scenarioIndex = Math.floor(Math.random() * this.scenarios.length);
         const scenario = this.responses[this.scenarios[scenarioIndex]];
