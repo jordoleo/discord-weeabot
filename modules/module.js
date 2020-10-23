@@ -1,24 +1,28 @@
 class Module {
-    constructor () {
+    constructorz() {
         if (this.constructor === Module) {
             throw new Error("Abstract classes can't be instantiated");
         }
         this.init();
     }
 
-    run (message) {
+    run(message) {
         throw new Error("Method 'run()' must be implemented.");
     }
 
-    execute (message) {
-        if (this.validate(message)) {
+    execute(message) {
+        if (this.isAvailable() && this.validate(message)) {
             this.run(message);
         }
     }
 
-    validate (message) {}
+    isAvailable() {
+        return this.available == null ? true : this.available;
+    }
 
-    init () {}
+    validate(message) {}
+
+    init() {}
 }
 
 export default Module;
