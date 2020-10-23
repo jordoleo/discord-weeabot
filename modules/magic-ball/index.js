@@ -8,6 +8,7 @@ class MagicBall extends Module {
     }
 
     run(message) {
+        // TODO refactor
         for (const key in this.customResponses) {
             if (this.customResponses.hasOwnProperty(key)) {
                 if (message.content.includes(key)) {
