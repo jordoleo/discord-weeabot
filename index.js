@@ -1,11 +1,8 @@
 import express from 'express';
-import { config } from 'dotenv';
 import { Client } from 'discord.js';
 import { commandUtils } from './utils';
 import { COMMAND } from './consts';
 import { magicBall } from './modules';
-
-config();
 
 const client = new Client();
 

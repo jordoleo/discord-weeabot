@@ -1,26 +1,26 @@
 import Module from "../module";
-import fs from 'fs';
+import { httpUtils } from '../../utils';
 
 class MagicBall extends Module {
-    loadResponses() {
-        this.responses = JSON.parse(fs.readFileSync("./files/mball-response.json"));
-        this.scenarios = Object.keys(this.responses);
+    constructor() {
+        super();
+        this.available = false;
     }
 
-    run (message) {
-        const msg = message.content;
-        if (msg.toLowerCase().includes("azen small pp")) {
-            message.reply("Always has been");
-            return;
+    run(message) {
+        // TODO refactor
+        for (const key in this.customResponses) {
+            if (this.customResponses.hasOwnProperty(key)) {
+                if (message.content.includes(key)) {
+                    message.reply(this.customResponses[key]);
+                    return;
+                }
+            }
         }
         const scenarioIndex = Math.floor(Math.random() * this.scenarios.length);
         const scenario = this.responses[this.scenarios[scenarioIndex]];
         const responseIndex = Math.floor(Math.random() * scenario.length);
         message.reply(scenario[responseIndex]);
-    }
-
-    init() {
-        this.loadResponses();
     }
 
     validate(message) {
@@ -31,6 +31,32 @@ class MagicBall extends Module {
         message.reply("Usage: " + words[0] + " [question]");
         return false;
     }
+
+    async load() {
+        try {
+            this.responses = await this.loadResponse();
+            this.customResponses = await this.loadCustomResponse();
+            this.scenarios = Object.keys(this.responses);
+            this.available = true;
+            console.info("Magic ball is ready");
+        } catch(err) {
+            console.error("Error when loading magic ball responses");
+            console.error(err);
+            this.available = false;
+        }
+    }
+
+    loadResponse() {
+        const responsesUrl = new URL(process.env.MBALL_RESPONSE);
+        return httpUtils.getJson(responsesUrl)
+    }
+
+    loadCustomResponse() {
+        const customResponsesUrl = new URL(process.env.MBALL_CUSTOM_RESPONSE);
+        return httpUtils.getJson(customResponsesUrl);
+    }
 }
 
-export default new MagicBall();
+const m = new MagicBall();
+m.load();
+export default m;
