@@ -1,5 +1,5 @@
 import Module from "../module";
-import { httpUtils } from '../../utils';
+import {httpUtils} from '../../utils';
 
 class MagicBall extends Module {
     constructor() {
@@ -39,7 +39,7 @@ class MagicBall extends Module {
             this.scenarios = Object.keys(this.responses);
             this.available = true;
             console.info("Magic ball is ready");
-        } catch(err) {
+        } catch (err) {
             console.error("Error when loading magic ball responses");
             console.error(err);
             this.available = false;

@@ -20,9 +20,11 @@ class Module {
         return this.available == null ? true : this.available;
     }
 
-    validate(message) {}
+    validate(message) {
+    }
 
-    init() {}
+    init() {
+    }
 }
 
 export default Module;
