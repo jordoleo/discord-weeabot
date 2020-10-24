@@ -1,5 +1,6 @@
 import Module from "../module";
 import {httpUtils} from '../../utils';
+import MessageBuilder from '../../service/builder/message-builder';
 
 class MagicBall extends Module {
     constructor() {
@@ -12,7 +13,7 @@ class MagicBall extends Module {
         for (const key in this.customResponses) {
             if (this.customResponses.hasOwnProperty(key)) {
                 if (message.content.includes(key)) {
-                    message.reply(this.customResponses[key]);
+                    this.reply(message, this.customResponses[key]);
                     return;
                 }
             }
@@ -20,7 +21,17 @@ class MagicBall extends Module {
         const scenarioIndex = Math.floor(Math.random() * this.scenarios.length);
         const scenario = this.responses[this.scenarios[scenarioIndex]];
         const responseIndex = Math.floor(Math.random() * scenario.length);
-        message.reply(scenario[responseIndex]);
+        this.reply(message, scenario[responseIndex]);
+    }
+
+    reply(message, replyContent) {
+        const content = message.content;
+        const embedMessage = new MessageBuilder()
+            .setTitle("Answering " + message.author.username + " question:")
+            .addField("Question", content.substr(content.indexOf(" ") + 1))
+            .addField("Answer", replyContent)
+            .build();
+        message.channel.send(embedMessage);
     }
 
     validate(message) {
@@ -28,7 +39,7 @@ class MagicBall extends Module {
         if (words.length > 1) {
             return true;
         }
-        message.reply("Usage: " + words[0] + " [question]");
+        message.channel.send(new MessageBuilder().addField("Usage", words[0] + " [question]").build());
         return false;
     }
 
