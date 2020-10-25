@@ -15,6 +15,16 @@ class MessageBuilder {
         return this;
     }
 
+    addDescriotion(desc) {
+        if (this.message.description) {
+            this.message.setDescription(this.message.description + "\n" + desc);
+        } else {
+            this.message.setDescription(desc);
+        }
+
+        return this;
+    }
+
     addQuotedField(key, value) {
         this.addField(key, '`' + value + '`');
         return this;

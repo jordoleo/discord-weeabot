@@ -1,14 +1,24 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
 
 class HttpUtils {
-    get(url) {
-        return fetch(url);
+    get(url, config = {}) {
+        return axios.get(url, config)
     }
 
-    getJson(url) {
-        return this.get(url)
-            .then(res => res.json())
-            .then(json => json);
+    post(url, body = {}, config = {}) {
+        return axios.post(url, body, config);
+    }
+
+    constructUrlParameter(url, parameters = {}) {
+        let newUrl = url;
+        Object.entries(parameters).forEach(([[key, value], index]) => {
+            let separator = '&';
+            if (index === 0) {
+                separator = "?";
+            }
+            newUrl += separator + key + "=" + value;
+        });
+        return newUrl;
     }
 }
 

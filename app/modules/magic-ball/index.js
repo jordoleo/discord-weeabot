@@ -58,13 +58,13 @@ class MagicBall extends Module {
     }
 
     loadResponse() {
-        const responsesUrl = new URL(process.env.MBALL_RESPONSE);
-        return httpUtils.getJson(responsesUrl)
+        const responsesUrl = process.env.MBALL_RESPONSE;
+        return httpUtils.get(responsesUrl).then(res => res.data);
     }
 
     loadCustomResponse() {
-        const customResponsesUrl = new URL(process.env.MBALL_CUSTOM_RESPONSE);
-        return httpUtils.getJson(customResponsesUrl);
+        const customResponsesUrl = process.env.MBALL_CUSTOM_RESPONSE;
+        return httpUtils.get(customResponsesUrl).then(res => res.data);
     }
 }
 
