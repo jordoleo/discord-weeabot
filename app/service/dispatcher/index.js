@@ -1,6 +1,6 @@
 import {commandUtils} from "../../utils";
 import {COMMAND} from "../../consts";
-import {magicBall} from "../../modules";
+import {magicBall, translate} from "../../modules";
 
 const dispatch = msg => {
     const message = msg.content;
@@ -10,6 +10,9 @@ const dispatch = msg => {
         case COMMAND.BALL:
         case COMMAND.M_BALL:
             module = magicBall;
+            break;
+        case COMMAND.TRANSLATE:
+            module = translate;
             break;
     }
 
