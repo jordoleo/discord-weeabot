@@ -1,6 +1,7 @@
 import express from 'express';
 import {Client} from 'discord.js';
 import dispatch from "./service/dispatcher";
+import router from './service/router';
 
 
 const start = () => {
@@ -15,6 +16,7 @@ const start = () => {
 
     const port = process.env.PORT || 5000;
     const app = express();
+    app.use(router);
     app.listen(port, () => {
     });
 };
