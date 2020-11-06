@@ -1,2 +1,2 @@
-import start from './ts';
+import start from './app';
 start();
