@@ -20,6 +20,7 @@ abstract class Module {
     }
 
     validate(message: Message) {
+        return true;
     }
 
     init() {
