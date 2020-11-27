@@ -3,7 +3,7 @@ import {Message} from 'discord.js';
 abstract class Module {
     available: boolean = true;
 
-    constructorz() {
+    constructor() {
         this.init();
     }
 

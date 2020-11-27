@@ -55,9 +55,9 @@ class Translate extends Module {
         }
         message.channel.send(new MessageBuilder()
             .setTitle("Usage")
-            .addDescriotion(words[0] + " [text to be translated]")
-            .addDescriotion(words[0] + " option:to [text to be translated]")
-            .addDescriotion(words[0] + " option:from|to [text to be translated]")
+            .addDescription(words[0] + " [text to be translated]")
+            .addDescription(words[0] + " option:to [text to be translated]")
+            .addDescription(words[0] + " option:from|to [text to be translated]")
             .addField("Default", "from:id\nto:en")
             .build());
         return false;
