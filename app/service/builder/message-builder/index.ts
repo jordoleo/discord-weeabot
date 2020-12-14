@@ -1,10 +1,14 @@
-import {MessageEmbed} from 'discord.js';
+import {MessageAttachment, MessageEmbed, MessageEmbedImage} from 'discord.js';
 
 class MessageBuilder {
     message: MessageEmbed;
 
     constructor() {
         this.message = new MessageEmbed();
+    }
+
+    static new() {
+        return new MessageBuilder();
     }
 
     setTitle(title: string) {
@@ -17,18 +21,33 @@ class MessageBuilder {
         return this;
     }
 
-    addDescriotion(desc: string) {
+    addDescription(desc: string) {
         if (this.message.description) {
             this.message.setDescription(this.message.description + "\n" + desc);
         } else {
             this.message.setDescription(desc);
         }
-
         return this;
     }
 
     addQuotedField(key: string, value: string) {
         this.addField(key, '`' + value + '`');
+        return this;
+    }
+
+
+    setImage(url: string) {
+        this.message.setImage(url);
+        return this;
+    }
+
+    setVideo(url: string) {
+        this.message.video
+    }
+
+    addFile(name: string, url: string) {
+        const attachment = new MessageAttachment(url, name);
+        this.message.attachFiles([attachment]);
         return this;
     }
 
