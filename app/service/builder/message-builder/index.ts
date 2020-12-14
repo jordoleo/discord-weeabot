@@ -7,6 +7,10 @@ class MessageBuilder {
         this.message = new MessageEmbed();
     }
 
+    static new() {
+        return new MessageBuilder();
+    }
+
     setTitle(title: string) {
         this.message.setTitle(title);
         return this;
@@ -35,6 +39,10 @@ class MessageBuilder {
     setImage(url: string) {
         this.message.setImage(url);
         return this;
+    }
+
+    setVideo(url: string) {
+        this.message.video
     }
 
     addFile(name: string, url: string) {

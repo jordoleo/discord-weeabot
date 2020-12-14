@@ -1,6 +1,6 @@
 import {commandUtils} from "../../utils";
 import {COMMAND} from "../../consts";
-import {choicePick, magicBall, meme, translate} from "../../modules";
+import {choicePick, magicBall, dankmeme, translate} from "../../modules";
 import {Message} from "discord.js";
 
 const dispatch = (msg: Message) => {
@@ -18,8 +18,8 @@ const dispatch = (msg: Message) => {
         case COMMAND.PICK:
             module = choicePick;
             break;
-        case COMMAND.MEME:
-            module = meme;
+        case COMMAND.DANKMEME:
+            module = dankmeme;
             break;
     }
 

@@ -5,12 +5,12 @@ const TRANSLATE = "translate";
 
 const PICK = "pick";
 
-const MEME = "meme";
+const DANKMEME = "dankmeme";
 
 export default {
     BALL,
     M_BALL,
     TRANSLATE,
     PICK,
-    MEME
+    DANKMEME
 }
