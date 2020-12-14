@@ -4,6 +4,9 @@ import {choicePick, magicBall, dankmeme, translate} from "../../modules";
 import {Message} from "discord.js";
 
 const dispatch = (msg: Message) => {
+    if (msg.author.bot) {
+        return;
+    }
     const message = msg.content;
     const command = commandUtils.getCommand(message);
     let module = null;
