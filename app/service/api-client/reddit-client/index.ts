@@ -30,7 +30,7 @@ class RedditClient {
     }
 
     async getRandomDankMeme() {
-        if (Date.now() > this.expiredTime) {
+        if (Date.now() < this.expiredTime) {
             return this.getRandomSubreddit("dankmeme");
         } else {
             await this.getAccessToken();
