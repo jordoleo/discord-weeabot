@@ -19,7 +19,7 @@ class Meme extends Module {
             return;
         }
         try {
-            this.redditClient.getRandomDankMeme().then(res => {
+            this.redditClient.getRandomDankMeme((res: any) => {
                 const post = res.data[0].data.children[0].data;
                 if (post.post_hint != "image") {
                     this.retrieveMeme(message, count++);
@@ -31,7 +31,7 @@ class Meme extends Module {
                         .build();
                     message.channel.send(embedMessage);
                 }
-            })
+            });
         } catch(e) {
             errorNotifyUtils.notifyDiscordError(message);
         }
@@ -40,10 +40,8 @@ class Meme extends Module {
     init() {
         super.init();
         this.redditClient = new RedditClient();
-        this.redditClient.getAccessToken().then(() => {
+        this.redditClient.getAccessToken(() => {
             console.log("Meme is ready");
-        }).catch(err => {
-            console.log("Unable to retrieve access token: ", err)
         });
     }
 }
