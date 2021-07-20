@@ -24,6 +24,7 @@ const dispatch = (msg: Message) => {
         case COMMAND.CRYPTO:
         case COMMAND.MOON:
         case COMMAND.CUAN:
+        case COMMAND.SANGKUT:
             module = coingecko;
             break;
     }
