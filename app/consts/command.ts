@@ -10,6 +10,7 @@ const DANKMEME = "dankmeme";
 const CRYPTO = "crypto";
 const MOON = "moon";
 const CUAN = "cuan";
+const SANGKUT = "sangkut";
 
 export default {
     BALL,
@@ -19,5 +20,6 @@ export default {
     DANKMEME,
     CRYPTO,
     MOON,
-    CUAN
+    CUAN,
+    SANGKUT
 }
