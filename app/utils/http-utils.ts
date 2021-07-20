@@ -30,6 +30,13 @@ class HttpUtils {
         console.log(formData.getHeaders());
         return this.api.post(url, formData, config);
     }
+
+    constructQueryParam(data: any): string {
+        const res = [];
+        for (let d in data)
+            res.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
+        return res.join('&');
+    }
 }
 
 export default new HttpUtils();
