@@ -65,8 +65,8 @@ class Coingecko extends Module {
             .then((data: any) => {
                 for (let key in data) {
                     let crypto = data[key];
-                    this.cryptoMapSymbol.set(crypto.symbol, crypto.id)
-                    this.cryptoMapName.set(crypto.name, crypto.id)
+                    this.cryptoMapSymbol.set(crypto.symbol.toLowerCase(), crypto.id)
+                    this.cryptoMapName.set(crypto.name.toLowerCase(), crypto.id)
                 }
                 console.log("Crypto is ready")
                 this.available = true
@@ -89,7 +89,7 @@ class Coingecko extends Module {
     parseToIds(cryptos: Array<string>): Array<string> {
         const ids: Array<string> = [];
         cryptos.forEach(c => {
-            const id = this.getCryptoId(c)
+            const id = this.getCryptoId(c.toLowerCase())
             if (id != undefined) {
                 ids.push(id)
             }
