@@ -8,6 +8,7 @@ class Coingecko extends Module {
     coingeckoClient!: CoingeckoClient
     cryptoMapSymbol!: Map<string, string>
     cryptoMapName!: Map<string, string>
+    cryptoMapId!: Map<string, boolean>
 
     run(message: Message): void {
         const contents = message.content.split(" ").splice(1);
@@ -22,10 +23,10 @@ class Coingecko extends Module {
         }
         else if (contents.length == 2) {
             const targetCurrency = contents[1];
-            promise = this.coingeckoClient.getCoinMarketInfo(ids, targetCurrency)
+            promise = this.coingeckoClient.getCoinMarketInfo(ids, targetCurrency);
         }
         else {
-            return
+            return;
         }
         promise.then(data => {
             let embedMessage = new MessageBuilder();
@@ -61,12 +62,14 @@ class Coingecko extends Module {
         this.coingeckoClient = new CoingeckoClient();
         this.cryptoMapName = new Map();
         this.cryptoMapSymbol = new Map();
+        this.cryptoMapId = new Map();
         this.coingeckoClient.getAllCoins()
             .then((data: any) => {
                 for (let key in data) {
                     let crypto = data[key];
-                    this.cryptoMapSymbol.set(crypto.symbol.toLowerCase(), crypto.id)
-                    this.cryptoMapName.set(crypto.name.toLowerCase(), crypto.id)
+                    this.cryptoMapSymbol.set(crypto.symbol.toLowerCase(), crypto.id);
+                    this.cryptoMapName.set(crypto.name.toLowerCase(), crypto.id);
+                    this.cryptoMapId.set(crypto.id, true);
                 }
                 console.log("Crypto is ready")
                 this.available = true
@@ -83,6 +86,9 @@ class Coingecko extends Module {
         if (this.cryptoMapName.get(value) != undefined) {
             return this.cryptoMapName.get(value);
         }
+        if (this.cryptoMapId.get(value) != undefined) {
+            return value;
+        }
         return undefined;
     }
 
@@ -91,7 +97,7 @@ class Coingecko extends Module {
         cryptos.forEach(c => {
             const id = this.getCryptoId(c.toLowerCase())
             if (id != undefined) {
-                ids.push(id)
+                ids.push(id);
             }
         })
         return ids
