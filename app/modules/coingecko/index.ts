@@ -80,14 +80,14 @@ class Coingecko extends Module {
     }
 
     getCryptoId(value: string) : string | undefined {
+        if (this.cryptoMapId.get(value) != undefined) {
+            return value;
+        }
         if (this.cryptoMapSymbol.get(value) != undefined) {
             return this.cryptoMapSymbol.get(value);
         }
         if (this.cryptoMapName.get(value) != undefined) {
             return this.cryptoMapName.get(value);
-        }
-        if (this.cryptoMapId.get(value) != undefined) {
-            return value;
         }
         return undefined;
     }
